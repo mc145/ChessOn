@@ -1,0 +1,68 @@
+body{
+    margin: 0; 
+    padding: 0; 
+}
+
+.navbar-container{ 
+    background-color:rgb(25, 25, 167); 
+    width: 100vw; 
+    height: 80px;
+    display: flex; 
+    align-items: center; 
+    
+}
+
+
+#navbar-home{
+    margin-left: 30px; 
+}
+
+.navbar-container a{
+    color:rgb(235, 222, 222); 
+    text-decoration: none;
+    font-size: 1.5em; 
+    margin-left: 20px; 
+    font-family: 'Lato', sans-serif;
+
+}
+
+.navbar-container a:hover {
+    color:rgb(255, 255, 255)
+}
+
+#navbar-chesson{
+    position: absolute; 
+    right: 50px; 
+    color: rgb(235, 222, 222); 
+    font-family: 'Lato', sans-serif; 
+    font-size: 2em; 
+    transform: scaleY(0.78);
+    font-weight: bolder;  
+}
+
+.login-form input{
+    width: 400px; 
+    height: 50px; 
+    padding-left: 10px; 
+    border: thin solid gray;
+    border-radius: 10px;
+
+}
+
+#submit{
+    width: 100px; 
+    padding-left: 0px; 
+    background-color: #f8f8ff;     
+}
+
+#submit:hover{
+    background-color: #dcdce6; 
+}
+
+
+
+.login-form{
+   text-align: center; 
+   margin-top: 5vh;
+}
+
