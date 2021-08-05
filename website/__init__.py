@@ -5,9 +5,18 @@ from flask_login import LoginManager
 
 
 
+
+
+
 def create_app():
     app = Flask(__name__) 
     app.config['SECRET KEY'] = 'hfdkajkdljdkfjdak'
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+    db = SQLAlchemy(app)  
+
+
+
 
     from .views import views
     from .auth import auth
@@ -16,4 +25,7 @@ def create_app():
     app.register_blueprint(auth, url_prefix='/') 
 
 
+
     return app 
+
+

@@ -39,3 +39,47 @@ body{
     transform: scaleY(0.78);
     font-weight: bolder;  
 }
+
+.login-form input{
+    width: 400px; 
+    height: 50px; 
+    padding-left: 10px; 
+    border: thin solid gray;
+    border-radius: 10px;
+
+}
+
+#submit{
+    width: 100px; 
+    padding-left: 0px; 
+    background-color: #f8f8ff;     
+}
+
+#submit:hover{
+    background-color: #dcdce6; 
+}
+
+
+
+.login-form{
+   text-align: center; 
+   margin-top: 5vh;
+}
+
+
+.alert-container{
+    background-color: rgb(20, 187, 20); 
+    height: 20px; 
+    width: 40%; 
+    padding-top: 10px;
+    text-align: center; 
+    margin: auto;  
+    opacity: 0%; 
+}
+
+.alert-container h3{
+    font-size: 1.25em; 
+    margin-top: -5px; 
+    font-family: 'Open Sans Condensed', sans-serif;
+    
+}
