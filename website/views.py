@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request, jsonify, flash 
-from flask_login import login_required, current_user 
 import json 
 
 

@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, login_required, logout_user, current_user
 import json 
 
 auth = Blueprint('auth', __name__) 
@@ -63,6 +62,8 @@ def register():
 @auth.route('/logged', methods=['POST', 'GET']) 
 def logged(): 
     return render_template('logged.html')
+
+
 
 
 
