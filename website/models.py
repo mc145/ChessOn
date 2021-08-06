@@ -1,7 +1,26 @@
-from . import db 
+import sqlite3
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True, nullable=False)
-    password = db.Column(db.String(60), nullable=False)
-        
+
+def drop_table():
+    with sqlite3.connect('users.db') as connection:
+        c = connection.cursor()
+        c.execute("""DROP TABLE IF EXISTS users;""")
+    return True
+
+
+def create_db():
+    with sqlite3.connect('users.db') as connection:
+        c = connection.cursor()
+        table = """CREATE TABLE users(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT NOT NULL,
+            password TEXT NOT NULL
+        );
+        """
+        c.execute(table)
+    return True
+
+
+if __name__ == '__main__':
+    drop_table()
+    create_db()
