@@ -1,7 +1,6 @@
 let registerForm = document.querySelector('form'); 
 
 let API_URL_1 = 'http://localhost:5000/register'; 
-let API_URL_2 = 'http://localhost:5000/loggedin'
 
 let statusCode = -1; 
 
@@ -49,8 +48,11 @@ registerForm.addEventListener('submit', (event) =>{
             document.getElementById('alert-container').style.opacity = "100%";  
 
             if(statusCode == 1){
-                window.location = 'http://localhost:5000/logged'; 
+                window.location = 'http://localhost:5000/login';
             }
+
+            
+            
 
         });
 

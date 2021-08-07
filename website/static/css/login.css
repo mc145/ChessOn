@@ -66,3 +66,21 @@ body{
    margin-top: 5vh;
 }
 
+
+
+.alert-container{
+    background-color: rgb(20, 187, 20); 
+    height: 20px; 
+    width: 40%; 
+    padding-top: 10px;
+    text-align: center; 
+    margin: auto;  
+    opacity: 0%; 
+}
+
+.alert-container h3{
+    font-size: 1.25em; 
+    margin-top: -5px; 
+    font-family: 'Open Sans Condensed', sans-serif;
+    
+}

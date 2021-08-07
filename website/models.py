@@ -20,7 +20,20 @@ def create_db():
         c.execute(table)
     return True
 
+def create_db_2():
+    with sqlite3.connect('users.db') as connection:
+        c = connection.cursor() 
+        table = """CREATE TABLE session(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT NOT NULL,
+            status INTEGER NOT NULL 
+        );
+        """
+        c.execute(table) 
+    return True 
+
 
 if __name__ == '__main__':
     drop_table()
     create_db()
+    create_db_2() 

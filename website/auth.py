@@ -7,16 +7,35 @@ import json
 auth = Blueprint('auth', __name__) 
 
 
+   
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+
     if request.method == 'POST':
         email = request.get_json()['email']
         password = request.get_json()['password']
-        print(email, password) 
+        account_exists = user_login_check(email, password) 
+        print("ACCOUNT EXISTS", account_exists) 
+        if account_exists: 
+            result = login_user(email) 
+            print("LOGIN USER", result) 
+
+            return redirect(url_for('views.home'))
+          
+
+        else:
+            response_message = {
+                "code": 0, 
+                "message": "Account doesn't exist" 
+            }
+            return json.dumps(response_message) 
 
        
     return render_template('login.html')
+   # return redirect(url_for('views.home'))
+
+
     
 @auth.route('/register', methods=['GET', 'POST']) 
 def register(): 
@@ -60,16 +79,30 @@ def register():
             return json.dumps(response_message) 
         else:
             response_message = add_user(email, password) 
+            response_message_2 = add_user_session(email) 
+            print(response_message_2) 
             return json.dumps(response_message) 
         
     else: 
         return render_template('register.html') 
 
 
-@auth.route('/logged', methods=['POST', 'GET']) 
-def logged(): 
-    return render_template('logged.html')
 
+
+
+
+def login_user(email): 
+    try: 
+        with sqlite3.connect("/home/mc145/Programming/ChessOn/website/users.db") as connection:
+            cursor = connection.cursor() 
+            cursor.execute("SELECT * FROM session WHERE email = ?", (email,)) 
+            session_user = cursor.fetchone() 
+            session_id = session_user[0]
+            cursor.execute("UPDATE session SET email = ?, status = ? WHERE ID = ?;", (email, 1, session_id)) 
+            result = 'Session updated' 
+    except: 
+            result = 'Session updating error'
+    return result 
 
 
 
@@ -91,15 +124,36 @@ def add_user(email, password):
         }
     return result 
 
+def add_user_session(email):
+    try: 
+        with sqlite3.connect("/home/mc145/Programming/ChessOn/website/users.db") as connection:
+            cursor = connection.cursor()
+            cursor.execute("""
+                INSERT INTO session (email, status) values (?, ?);    
+            """, (email, 0,))
+            result = 'user session inserted'
+    except: 
+        result = 'error'
+    return result 
+
 def check_if_user_exists(email):
     with sqlite3.connect("/home/mc145/Programming/ChessOn/website/users.db") as connection:
         cursor = connection.cursor() 
         cursor.execute("SELECT * FROM users WHERE email = ?", (email,)) 
         existing_email = cursor.fetchone() 
-        if(existing_email):
+        if existing_email:
             return True
         return False 
 
+def user_login_check(email, password): 
+    with sqlite3.connect("/home/mc145/Programming/ChessOn/website/users.db") as connection:
+        cursor = connection.cursor() 
+        cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+        existing_email = cursor.fetchone() 
+        print("EXISTING EMAIL", existing_email)
+        if existing_email and existing_email[-1] == password:
+            return True 
+        return False 
 
 
 #For Signup
